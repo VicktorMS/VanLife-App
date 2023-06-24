@@ -1,0 +1,41 @@
+.introArea {
+    height: 65%;   
+    padding: 20px;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('/src/assets/image-53.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.bottom {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    width: 1fr;
+}
+.bottom h3{
+    font-size: 20px;
+    font-weight: 900;
+}
+.introArea a {
+    color: #FFF;
+    font-weight: 800;
+}
+
+.introArea button{
+    margin-top: 20px;
+    padding: 14px 0px;
+    background-color: #FF8C38;
+    border: none;
+    border-radius: 4px;
+}
+
+.introArea h2 {
+    font-weight: 800;
+    font-size: 36px;
+}
