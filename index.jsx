@@ -9,6 +9,9 @@ import Home from "./src/pages/Home/Home";
 import About from "./src/pages/About/About";
 import Header from "./src/components/Header/Header";
 import Footer from "./src/components/Footer/Footer";
+import Vans from "./src/pages/Vans/Vans";
+import "./server.js"
+import VanDetail from "./src/pages/VanDetail/VanDetail";
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -18,6 +21,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/vans" element={<Vans />} />
+        <Route path="/vans/:id" element={<VanDetail />} />
       </Routes>
       <Footer/>
     </BrowserRouter>

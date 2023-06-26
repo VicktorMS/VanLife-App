@@ -1,0 +1,32 @@
+.cardsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.cardContainer{
+    position: relative;
+    gap: 6px;
+}
+
+
+.vanPrice, .vanName{ 
+    font-weight: 500;
+}
+
+.vanDayLabel{
+    font-size: 12px;
+}
+.cardImage{
+    max-width: 100%;
+    border-radius: 6px;
+}
+.cardType{
+    position: absolute;
+    bottom: 0px;
+}
+
+.cardInfoWrapper{
+    display: flex;
+    justify-content: space-between;
+}
