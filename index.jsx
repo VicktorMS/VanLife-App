@@ -16,23 +16,23 @@ import Dashboard from "./src/pages/Host/Dashboard/Dashboard";
 import Income from "./src/pages/Host/Income/Income";
 import Reviews from "./src/pages/Host/Reviews/Reviews";
 import "./server.js";
-import HostLayout from "./src/pages/Host/HostLayout/HostLayout";
+import HostLayout from "./src/components/HostLayout/HostLayout";
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/vans" element={<Vans />} />
-          <Route path="/vans/:id" element={<VanDetail />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="vans" element={<Vans />} />
+          <Route path="vans/:id" element={<VanDetail />} />
 
-          <Route element={<HostLayout/>}>
-            <Route path="/host" element={<Dashboard/>}/>
-            <Route path="/host/income" element={<Income />} />
-            <Route path="/host/reviews" element={<Reviews />} />
+          <Route path="host" element={<HostLayout/>}>
+            <Route index element={<Dashboard/>}/>
+            <Route path="income" element={<Income />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
         
