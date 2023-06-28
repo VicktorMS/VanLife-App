@@ -1,8 +1,13 @@
 import React from 'react'
+import styles from './HostVans.module.css'
+import GenerateHostVansList from '../../../components/GenerateHostVansList/GenerateHostVansList'
 
 function HostVans() {
   return (
-    <div>HostVans</div>
+    <div className={styles.container}>
+      <h2 className={styles.mainTitle}>Suas vans</h2>
+      <GenerateHostVansList/>
+    </div>
   )
 }
 
