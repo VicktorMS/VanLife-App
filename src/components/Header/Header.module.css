@@ -7,6 +7,11 @@
     padding: 16px;
     height: 100%;
 }
+.activeLink{
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
+}
 .navLinks {
     display: flex;
     align-items: center;
@@ -15,6 +20,16 @@
 a{
     color: #000;
     cursor: pointer;
+}
+
+.navLinks a:hover{
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
+}
+
+.logo:hover {
+    text-decoration: none;
 }
 
 h1{

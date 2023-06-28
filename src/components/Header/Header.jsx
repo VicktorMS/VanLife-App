@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import '../../../index.css'
 
 const Header = () => {
   return (
@@ -8,14 +9,14 @@ const Header = () => {
       <nav>
         <ul className={styles.navList}>
           <li>
-            <Link to="/">
+            <Link className={styles.logo} to="/">
               <h1>#VANLIFE</h1>
             </Link>
           </li>
           <li className={styles.navLinks}>
-            <Link to="/host">Host</Link>
-            <Link to="/about">About</Link>
-            <Link to="/vans">Vans</Link>
+            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/host">Host</NavLink>
+            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/about">About</NavLink>
+            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/vans">Vans</NavLink>
           </li>
         </ul>
       </nav>
@@ -23,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;
