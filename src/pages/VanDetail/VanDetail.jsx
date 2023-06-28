@@ -13,7 +13,7 @@ function VanDetail() {
 
 
   return (
-    <main className={styles.detailContainer}>
+    <div className={styles.detailContainer}>
       <img className={styles.vanImage} src={data.vans.imageUrl} alt={"Imagem de " + data.vans.name} />
       <div className={styles.vanType}>
         {data.vans.type}
@@ -24,7 +24,7 @@ function VanDetail() {
         {data.vans.description}
       </p>
       <button>Alugue esta Van</button>
-    </main>
+    </div>
   );
 }
 

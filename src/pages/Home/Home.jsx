@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <main>
+    <>
       <div className={styles.introArea}>
         <h2>You got the travel plans, we got the travel vans.</h2>
         <p>
@@ -16,7 +16,7 @@ function Home() {
         </button>
       </div>
       <div className={styles.bottom}></div>
-    </main>
+    </>
   );
 }
 

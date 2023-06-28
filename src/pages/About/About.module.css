@@ -1,6 +1,7 @@
 .mainArea{
     display: grid;
     grid-template-rows: 30% 1fr;
+    height: 100%;
 }
 .vanImage{
     background: #1C1C1C;

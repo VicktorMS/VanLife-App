@@ -1,14 +1,14 @@
-import React from 'react'
-import styles from './Vans.module.css'
-import GenerateVansCards from '../../components/GenerateVansCard/GenerateVansCards'
+import React from "react";
+import styles from "./Vans.module.css";
+import GenerateVansCards from "../../components/GenerateVansCard/GenerateVansCards";
 
 function Vans() {
   return (
-    <main className={styles.vansContainer}>
-        <h2>Descubra novas experiências</h2>
-        <GenerateVansCards/>
-    </main>
-  )
+    <div className={styles.vansContainer}>
+      <h2>Descubra novas experiências</h2>
+      <GenerateVansCards />
+    </div>
+  );
 }
 
-export default Vans
+export default Vans;

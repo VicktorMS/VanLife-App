@@ -13,6 +13,7 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.navLinks}>
+            <Link to="/host">Host</Link>
             <Link to="/about">About</Link>
             <Link to="/vans">Vans</Link>
           </li>
@@ -22,4 +23,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header; 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function About() {
   return (
-    <main className={styles.mainArea}>
+    <div className={styles.mainArea}>
       <div className={styles.vanImage}> </div>
       <div className={styles.aboutInfo}>
         <div className={styles.info}>
@@ -31,7 +31,7 @@ function About() {
           </button>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
