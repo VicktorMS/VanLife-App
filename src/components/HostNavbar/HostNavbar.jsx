@@ -17,7 +17,7 @@ function HostNavbar() {
             <NavLink
               end //Previne esse link fique ativo quando em um rota diferente
               style={({ isActive }) => (isActive ? linkIsActive : null)}
-              to="/host/"
+              to="."
             >
               DashBoard
             </NavLink>
@@ -25,7 +25,7 @@ function HostNavbar() {
           <li>
             <NavLink
               style={({ isActive }) => (isActive ? linkIsActive : null)}
-              to="/host/income"
+              to="income"
             >
               Income
             </NavLink>
@@ -33,7 +33,7 @@ function HostNavbar() {
           <li>
             <NavLink
               style={({ isActive }) => (isActive ? linkIsActive : null)}
-              to="/host/reviews"
+              to="reviews"
             >
               Reviews
             </NavLink>
@@ -41,7 +41,7 @@ function HostNavbar() {
           <li>
             <NavLink
               style={({ isActive }) => (isActive ? linkIsActive : null)}
-              to="/host/vans"
+              to="vans"
             >
               Vans
             </NavLink>
