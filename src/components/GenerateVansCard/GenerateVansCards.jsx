@@ -2,17 +2,27 @@
 import React from "react";
 import styles from "./GenerateVansCards.module.css";
 import useFetch from "react-fetch-hook";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 function GenerateVansCards() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const typeFilter = searchParams.get("type");
+
+  console.log(typeFilter);
+
   const { isLoading, error, data } = useFetch("/api/vans");
 
   if (isLoading) return "Loading...";
 
   if (error) return "Não foi possível encontrar vans" + error;
 
+  const displayedVans = typeFilter
+    ? data.vans.filter((van) => van.type === typeFilter)
+    : data.vans;
+
   return (
     <ul className={styles.cardsContainer}>
-      {data.vans.map((vanData) => (
+      {displayedVans.map((vanData) => (
         <VanCard key={vanData.id} data={vanData} />
       ))}
     </ul>
@@ -23,7 +33,7 @@ function VanCard({ data }) {
   const { id, name, price, description, imageUrl, type } = data;
   return (
     <li>
-      <Link to={`/vans/${id}`} className={styles.cardContainer}>
+      <Link to={`${id}`} className={styles.cardContainer}>
         <img
           className={styles.cardImage}
           src={imageUrl}
