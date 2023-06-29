@@ -19,7 +19,12 @@ import Dashboard from "./src/pages/Host/Dashboard/Dashboard";
 import Income from "./src/pages/Host/Income/Income";
 import Reviews from "./src/pages/Host/Reviews/Reviews";
 import HostVans from './src/pages/Host/HostVans/HostVans'
+
 import HostVanDetail from "./src/pages/Host/HostVanDetail/HostVanDetail";
+import HostVanInfo from './src/pages/Host/HostVanInfo/HostVanInfo'
+import HostVanPhotos from './src/pages/Host/HostVanPhotos/HostVanPhotos'
+import HostVanPricing from './src/pages/Host/HostVanPricing/HostVanPricing'
+
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -37,7 +42,13 @@ function App() {
             <Route path="income" element={<Income />} />
             <Route path="reviews" element={<Reviews />} />
             <Route path="vans" element={<HostVans />} />
-            <Route path="vans/:id" element={<HostVanDetail />} />
+            
+            <Route path="vans/:id" element={<HostVanDetail />}>
+              <Route index element={<HostVanInfo/>}/>
+              <Route path="photos" element={<HostVanPhotos/>}/>
+              <Route path="pricing" element={<HostVanPricing/>}/>
+            </Route>
+
           </Route>
         </Route>
         
