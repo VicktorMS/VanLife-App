@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './HostVanDetail.module.css'
-import { NavLink, useParams } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 import useFetch from 'react-fetch-hook'
 
 function HostVanDetail() {
@@ -17,6 +17,7 @@ function HostVanDetail() {
 
   return (
     <div className={styles.pageContainer}>
+      <Link to='..' relative="path">&larr; Back to all vans</Link>
       <div className={styles.container}>
         <div className={styles.content}>
           <img src={imageUrl} alt={"Van " + name} />
