@@ -1,0 +1,7 @@
+.container :nth-child(1){
+    font-weight: bold;
+    font-size: 26px;
+}
+.container :nth-child(2){
+    color: #4D4D4D;
+}

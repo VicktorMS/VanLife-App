@@ -4,6 +4,11 @@ import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import useFetch from "react-fetch-hook";
 
 function HostVanDetail() {
+  const linkIsActive = {
+    fontWeight: "bold",
+    textDecoration: "underline",
+    color: "#161616",
+  };
   const { id: paramID } = useParams();
 
   const { isLoading, data, error } = useFetch(`/api/host/vans/${paramID}`);
@@ -13,6 +18,7 @@ function HostVanDetail() {
   if (error) return "Não foi possível encontrar essa Van" + error;
 
   const { name, id, imageUrl, price, type } = data.vans[0];
+
 
   return (
     <div className={styles.pageContainer}>
@@ -32,18 +38,12 @@ function HostVanDetail() {
         </div>
         <nav>
           <ul className={styles.navList}>
-            <li>
-              <NavLink>Details</NavLink>
-            </li>
-            <li>
-              <NavLink>Pricing</NavLink>
-            </li>
-            <li>
-              <NavLink>Photos</NavLink>
-            </li>
+            <li><NavLink style={({ isActive }) => (isActive ? linkIsActive : null)} end to="." >Details</NavLink></li>
+            <li><NavLink style={({ isActive }) => (isActive ? linkIsActive : null)} to='pricing'>Pricing</NavLink></li>
+            <li><NavLink style={({ isActive }) => (isActive ? linkIsActive : null)} to='photos'>Photos</NavLink></li>
           </ul>
         </nav>
-        <Outlet />
+        <Outlet context={data.vans}/>
       </div>
     </div>
   );
