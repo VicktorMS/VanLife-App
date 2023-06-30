@@ -1,12 +1,13 @@
 import React from "react";
 import useFetch from "react-fetch-hook";
 import styles from "./GenerateHostVansList.module.css";
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 import { Link } from "react-router-dom";
 
 function GenerateHostVansList() {
   const { isLoading, data, error } = useFetch("/api/host/vans");
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingScreen/>;
 
   if (error) return "Não foi possível encontrar vans" + error;
 
@@ -22,7 +23,7 @@ function GenerateHostVansList() {
 const VanCard = ({ data }) => {
   const { id, name, price, imageUrl } = data;
   return (
-    <Link to={`/host/vans/${id}`}>
+    <Link to={id}>
       <div className={styles.vanCardContainer}>
         <img src={imageUrl} alt={name}/>
         <div className={styles.contentWrapper}>

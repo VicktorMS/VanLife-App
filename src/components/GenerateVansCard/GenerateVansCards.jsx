@@ -3,16 +3,16 @@ import React from "react";
 import styles from "./GenerateVansCards.module.css";
 import useFetch from "react-fetch-hook";
 import { Link, useSearchParams } from "react-router-dom";
+import TypeTag from "../TypeTag/TypeTag";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 function GenerateVansCards() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const typeFilter = searchParams.get("type");
 
-  console.log(typeFilter);
-
   const { isLoading, error, data } = useFetch("/api/vans");
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingScreen/>;
 
   if (error) return "Não foi possível encontrar vans" + error;
 
@@ -29,11 +29,12 @@ function GenerateVansCards() {
   );
 }
 
+
 function VanCard({ data }) {
-  const { id, name, price, description, imageUrl, type } = data;
+  const { id, name, price, imageUrl, type } = data;
   return (
     <li>
-      <Link to={`${id}`} className={styles.cardContainer}>
+      <Link to={id} className={styles.cardContainer}>
         <img
           className={styles.cardImage}
           src={imageUrl}
@@ -45,9 +46,8 @@ function VanCard({ data }) {
             <p className={styles.vanPrice}>${price}</p>
             <p className={styles.vanDayLabel}>/dia</p>
           </div>
+          <TypeTag position="absolute" bottom="0" type={type}/>
         </div>
-
-        <div className={styles.cardType}>{type}</div>
       </Link>
     </li>
   );

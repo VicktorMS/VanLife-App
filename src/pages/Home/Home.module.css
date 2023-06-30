@@ -1,5 +1,5 @@
 .introArea {
-    height: 65%;   
+    min-height: 65%;   
     padding: 20px;
     color: #FFF;
     display: flex;

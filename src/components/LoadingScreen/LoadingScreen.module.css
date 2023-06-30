@@ -1,0 +1,13 @@
+.container{
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loadingContent{
+    animation-name: spin;
+    animation-duration: 5s;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}

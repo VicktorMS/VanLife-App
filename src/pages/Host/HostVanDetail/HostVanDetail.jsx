@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./HostVanDetail.module.css";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import TypeTag from '../../../components/TypeTag/TypeTag'
 import useFetch from "react-fetch-hook";
+import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
 
 function HostVanDetail() {
   const linkIsActive = {
@@ -13,7 +15,7 @@ function HostVanDetail() {
 
   const { isLoading, data, error } = useFetch(`/api/host/vans/${paramID}`);
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <LoadingScreen/>;
 
   if (error) return "Não foi possível encontrar essa Van" + error;
 
@@ -29,7 +31,7 @@ function HostVanDetail() {
         <div className={styles.content}>
           <img src={imageUrl} alt={"Van " + name} />
           <div className={styles.contentText}>
-            <div>{type}</div>
+            <TypeTag type={type}/>
             <h2 className={styles.mainTitle}>{name}</h2>
             <p>
               <span style={{ fontWeight: "bold" }}>${price}</span>/dia

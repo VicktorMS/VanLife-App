@@ -1,3 +1,32 @@
 .vansContainer{
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.vansContainer h2{
+    font-size: 24px;
+}
+
+.filtersContainer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filtersButton{
+    display: flex;
+    gap: 8px;
+}
+.filtersButton button{
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: none;
+    background-color:bisque;
+}
+.clearFilterButton{
+    border: none;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 14px;
+    background-color: transparent;
 }
