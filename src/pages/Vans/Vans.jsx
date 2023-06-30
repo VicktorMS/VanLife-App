@@ -1,25 +1,20 @@
 import React from "react";
 import styles from "./Vans.module.css";
 import GenerateVansCards from "../../components/GenerateVansCard/GenerateVansCards";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 function Vans() {
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
   return (
     <div className={styles.vansContainer}>
       <h2>Descubra novas experiências</h2>
       <div>
-        <Link to="?type=simple">
-          simples
-        </Link>
-        <Link to="?type=rugged">
-          rugged
-        </Link>
-        <Link to="?type=luxury">
-          luxury
-        </Link>
-        <Link to=".">
-          clear
-        </Link>
+          <button onClick={() => setSearchParams({type:"simple"})} >simples</button> 
+          <button onClick={() => setSearchParams({type:"rugged"})} >rugged</button> 
+          <button onClick={() => setSearchParams({type:"luxury"})} >luxury</button> 
+          <button onClick={() => setSearchParams({})} >clear</button> 
       </div>
       <GenerateVansCards />
     </div>
