@@ -24,6 +24,7 @@ import HostVanDetail from "./src/pages/Host/HostVanDetail/HostVanDetail";
 import HostVanInfo from './src/pages/Host/HostVanInfo/HostVanInfo'
 import HostVanPhotos from './src/pages/Host/HostVanPhotos/HostVanPhotos'
 import HostVanPricing from './src/pages/Host/HostVanPricing/HostVanPricing'
+import NotFound from "./src/components/NotFound/NotFound.jsx";
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
             </Route>
 
           </Route>
+          <Route path="*" element={<NotFound/>}/>
         </Route>
         
       </Routes>

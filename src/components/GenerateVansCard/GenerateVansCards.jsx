@@ -5,20 +5,35 @@ import useFetch from "react-fetch-hook";
 import { Link, useSearchParams } from "react-router-dom";
 import TypeTag from "../TypeTag/TypeTag";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import { getVans } from "../../../api";
+
 function GenerateVansCards() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  
+  const [vansData, setVansData] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const typeFilter = searchParams.get("type");
 
-  const { isLoading, error, data } = useFetch("/api/vans");
+  // const { isLoading, error, data } = useFetch("/api/vans");
+  React.useEffect(() => {
+    async function loadVans() {
+      setIsLoading(true)
+      const data = await getVans();
+      setVansData(data);
+      setIsLoading(false);
+    }
+    loadVans();
+  }, []);
 
-  if (isLoading) return <LoadingScreen/>;
+  if (isLoading) return <LoadingScreen />
 
-  if (error) return "Não foi possível encontrar vans" + error;
+  // if (error) return "Não foi possível encontrar vans" + error;
 
   const displayedVans = typeFilter
-    ? data.vans.filter((van) => van.type === typeFilter)
-    : data.vans;
+    ? vansData.filter((van) => van.type === typeFilter)
+    : vansData;
+
 
   return (
     <ul className={styles.cardsContainer}>
@@ -29,12 +44,17 @@ function GenerateVansCards() {
   );
 }
 
-
 function VanCard({ data }) {
   const { id, name, price, imageUrl, type } = data;
+  const [searchParams] = useSearchParams();
+  const typeFilter = searchParams.get("type");
   return (
     <li>
-      <Link to={id} className={styles.cardContainer}>
+      <Link
+        to={id}
+        state={{ search: searchParams.toString(), type: typeFilter }}
+        className={styles.cardContainer}
+      >
         <img
           className={styles.cardImage}
           src={imageUrl}
@@ -46,7 +66,7 @@ function VanCard({ data }) {
             <p className={styles.vanPrice}>${price}</p>
             <p className={styles.vanDayLabel}>/dia</p>
           </div>
-          <TypeTag position="absolute" bottom="0" type={type}/>
+          <TypeTag position="absolute" bottom="0" type={type} />
         </div>
       </Link>
     </li>
