@@ -11,57 +11,57 @@ function GenerateVansCards() {
   const [searchParams] = useSearchParams();
 
   //Data Handling States
-  const [vansData, setVansData] = React.useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  // const [vansData, setVansData] = React.useState([]);
+  // const [isLoading, setIsLoading] = React.useState(false);
+  // const [error, setError] = React.useState(null);
 
   const typeFilter = searchParams.get("type");
 
-  // const { isLoading, error, data } = useFetch("/api/vans");
+  const { isLoading, error, data } = useFetch("/api/vans");
 
 
-  React.useEffect(() => {
-    async function loadVans() {
-      setIsLoading(true);
-      try {
-        const data = await getVans(); //function called from api.js
-        setVansData(data);
-      } 
-      catch (err) {
-        console.log("Error",err); // doesn't catch any errors
-        setError(err);
-      } 
-      finally {
-        setIsLoading(false);
-      }
-    }
-    loadVans();
-  }, []);
+  // React.useEffect(() => {
+  //   async function loadVans() {
+  //     setIsLoading(true);
+  //     try {
+  //       const data = await getVans(); //function called from api.js
+  //       setVansData(data);
+  //     } 
+  //     catch (err) {
+  //       console.log("Error",err); // doesn't catch any errors
+  //       setError(err);
+  //     } 
+  //     finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+  //   loadVans();
+  // }, []);
 
   
   //If is loading show Loading component
   if (isLoading) return <LoadingScreen />;
 
   //If there is any error, show this message 
-  if (error) return "Não foi possível encontrar vans: " + error.message;
+  if (error) return <h1>Não foi possível encontrar vans: {error.message}</h1>;
 
 
   //Filtering vans data
   const displayedVans = typeFilter
-    ? vansData.filter((van) => van.type === typeFilter)
-    : vansData;
+    ? data.vans.filter((van) => van.type === typeFilter)
+    : data.vans;
 
   //If there is no error and loading is complete, map the components
   //Should not be rendered if there is no data or error
   return (
     <ul className={styles.cardsContainer}>
 
-      {/* {displayedVans.map((vanData) => (
+      {displayedVans?.map((vanData) => (
         <VanCard key={vanData.id} data={vanData} />
-      ))} */}
+      ))}
 
       {console.log("Error " + error) /*checking if there is any errors*/}
-      {console.log("Data " + vansData)}
+      {console.log("Data " + data)}
     </ul>
   );
 }
