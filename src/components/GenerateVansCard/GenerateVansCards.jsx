@@ -9,41 +9,66 @@ import { getVans } from "../../../api";
 
 function GenerateVansCards() {
   const [searchParams] = useSearchParams();
-  
-  const [vansData, setVansData] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+
+  //Data Handling States
+  const [vansData, setVansData] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
 
   const typeFilter = searchParams.get("type");
 
   // const { isLoading, error, data } = useFetch("/api/vans");
+
+
   React.useEffect(() => {
     async function loadVans() {
-      setIsLoading(true)
-      const data = await getVans();
-      setVansData(data);
-      setIsLoading(false);
+      setIsLoading(true);
+      try {
+        const data = await getVans(); //function called from api.js
+        setVansData(data);
+      } 
+      catch (err) {
+        console.log("Error",err); // doesn't catch any errors
+        setError(err);
+      } 
+      finally {
+        setIsLoading(false);
+      }
     }
     loadVans();
   }, []);
 
-  if (isLoading) return <LoadingScreen />
+  
+  //If is loading show Loading component
+  if (isLoading) return <LoadingScreen />;
 
-  // if (error) return "Não foi possível encontrar vans" + error;
+  //If there is any error, show this message 
+  if (error) return "Não foi possível encontrar vans: " + error.message;
 
+
+  //Filtering vans data
   const displayedVans = typeFilter
     ? vansData.filter((van) => van.type === typeFilter)
     : vansData;
 
-
+  //If there is no error and loading is complete, map the components
+  //Should not be rendered if there is no data or error
   return (
     <ul className={styles.cardsContainer}>
-      {displayedVans.map((vanData) => (
+
+      {/* {displayedVans.map((vanData) => (
         <VanCard key={vanData.id} data={vanData} />
-      ))}
+      ))} */}
+
+      {console.log("Error " + error) /*checking if there is any errors*/}
+      {console.log("Data " + vansData)}
     </ul>
   );
 }
 
+
+
+// Card component
 function VanCard({ data }) {
   const { id, name, price, imageUrl, type } = data;
   const [searchParams] = useSearchParams();
