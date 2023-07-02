@@ -16,7 +16,7 @@ function Vans() {
 
   return (
     <div className={styles.vansContainer}>
-      <h2>Descubra novas experiências</h2>
+      <h2>Explore our van options</h2>
       <div className={styles.filtersContainer}>
         <div className={styles.filtersButton}>
           <button
