@@ -3,9 +3,21 @@ import useFetch from "react-fetch-hook";
 import styles from "./GenerateHostVansList.module.css";
 import LoadingScreen from '../LoadingScreen/LoadingScreen'
 import { Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+
+
+
+export function loader(){
+  return 'Van data Goes Here';
+}
+
 
 function GenerateHostVansList() {
   const { isLoading, data, error } = useFetch("/api/host/vans");
+
+  const loaderData = useLoaderData()
+
+  console.log(loaderData)
 
   if (isLoading) return <LoadingScreen/>;
 

@@ -31,6 +31,9 @@ import HostVanPhotos from "./src/pages/Host/HostVanPhotos/HostVanPhotos";
 import HostVanPricing from "./src/pages/Host/HostVanPricing/HostVanPricing";
 import NotFound from "./src/components/NotFound/NotFound.jsx";
 
+import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx"
+
+
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
 
@@ -39,7 +42,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
-        <Route path="vans" element={<Vans />} />
+        <Route path="vans" element={<Vans />} loader={vansPageLoader} />
         <Route path="vans/:id" element={<VanDetail />} />
 
         <Route path="host" element={<HostLayout />}>

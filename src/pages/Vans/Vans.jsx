@@ -48,21 +48,3 @@ function Vans() {
 }
 
 export default Vans;
-
-/// Function responsible for merging and deleting search params
-// function genNewSearchParamString(key, value) {
-//   const sp = new URLSearchParams(searchParams);
-//   if (value === null) {
-//     sp.delete(key);
-//   } else {
-//     sp.set(key, value);
-//   }
-//   return `?${sp.toString()}`;
-// }
-
-// <div>
-//     <Link to={genNewSearchParamString("type","simple")} >simples</Link>
-//     <Link to={genNewSearchParamString("type","rugged")} >rugged</Link>
-//     <Link to={genNewSearchParamString("type","luxury")} >luxury</Link>
-//     <Link to={genNewSearchParamString("type", null)} >clear</Link>
-// </div>

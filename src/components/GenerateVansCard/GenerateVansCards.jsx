@@ -2,49 +2,31 @@
 import React from "react";
 import styles from "./GenerateVansCards.module.css";
 import useFetch from "react-fetch-hook";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import TypeTag from "../TypeTag/TypeTag";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { getVans } from "../../../api";
 
+export function loader() {
+  return getVans()
+}
+
 function GenerateVansCards() {
   const [searchParams] = useSearchParams();
-
-  //Data Handling States
-  // const [vansData, setVansData] = React.useState([]);
-  // const [isLoading, setIsLoading] = React.useState(false);
-  // const [error, setError] = React.useState(null);
 
   const typeFilter = searchParams.get("type");
 
   const { isLoading, error, data } = useFetch("/api/vans");
 
 
-  // React.useEffect(() => {
-  //   async function loadVans() {
-  //     setIsLoading(true);
-  //     try {
-  //       const data = await getVans(); //function called from api.js
-  //       setVansData(data);
-  //     } 
-  //     catch (err) {
-  //       console.log("Error",err); // doesn't catch any errors
-  //       setError(err);
-  //     } 
-  //     finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-  //   loadVans();
-  // }, []);
+  const loaderData = useLoaderData()
+  console.log(loaderData)
 
-  
   //If is loading show Loading component
   if (isLoading) return <LoadingScreen />;
 
-  //If there is any error, show this message 
+  //If there is any error, show this message
   if (error) return <h1>Não foi possível encontrar vans: {error.message}</h1>;
-
 
   //Filtering vans data
   const displayedVans = typeFilter
@@ -55,18 +37,12 @@ function GenerateVansCards() {
   //Should not be rendered if there is no data or error
   return (
     <ul className={styles.cardsContainer}>
-
       {displayedVans?.map((vanData) => (
         <VanCard key={vanData.id} data={vanData} />
       ))}
-
-      {console.log("Error " + error) /*checking if there is any errors*/}
-      {console.log("Data " + data)}
     </ul>
   );
 }
-
-
 
 // Card component
 function VanCard({ data }) {
@@ -99,3 +75,26 @@ function VanCard({ data }) {
 }
 
 export default GenerateVansCards;
+
+//Data Handling States
+// const [vansData, setVansData] = React.useState([]);
+// const [isLoading, setIsLoading] = React.useState(false);
+// const [error, setError] = React.useState(null);
+
+// React.useEffect(() => {
+//   async function loadVans() {
+//     setIsLoading(true);
+//     try {
+//       const data = await getVans(); //function called from api.js
+//       setVansData(data);
+//     }
+//     catch (err) {
+//       console.log("Error",err); // doesn't catch any errors
+//       setError(err);
+//     }
+//     finally {
+//       setIsLoading(false);
+//     }
+//   }
+//   loadVans();
+// }, []);
