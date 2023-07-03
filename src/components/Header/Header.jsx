@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Header.module.css";
+import AvatarIcon from "../Icons/AvatarIcon";
 import { NavLink, Link } from "react-router-dom";
-import '../../../index.css'
+import "../../../index.css";
 
 const Header = () => {
   return (
@@ -14,9 +15,27 @@ const Header = () => {
             </Link>
           </li>
           <li className={styles.navLinks}>
-            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/host">Host</NavLink>
-            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/about">About</NavLink>
-            <NavLink className={({isActive}) => isActive ? "activeLink" : null} to="/vans">Vans</NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "activeLink" : null)}
+              to="/host"
+            >
+              Host
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "activeLink" : null)}
+              to="/about"
+            >
+              About
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "activeLink" : null)}
+              to="/vans"
+            >
+              Vans
+            </NavLink>
+            <Link to="login">
+              <AvatarIcon width={28} />
+            </Link>
           </li>
         </ul>
       </nav>

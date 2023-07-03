@@ -18,6 +18,7 @@ import About from "./src/pages/About/About";
 import Vans from "./src/pages/Vans/Vans";
 import VanDetail from "./src/pages/VanDetail/VanDetail";
 import Layout from "./src/components/Layout/Layout";
+import Login from "./src/pages/Login/Login.jsx";
 
 import HostLayout from "./src/components/HostLayout/HostLayout";
 import Dashboard from "./src/pages/Host/Dashboard/Dashboard";
@@ -31,6 +32,7 @@ import HostVanPhotos from "./src/pages/Host/HostVanPhotos/HostVanPhotos";
 import HostVanPricing from "./src/pages/Host/HostVanPricing/HostVanPricing";
 import NotFound from "./src/components/NotFound/NotFound.jsx";
 
+import Error from "./src/components/Error/Error.jsx";
 import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx"
 
 
@@ -41,8 +43,9 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
-        <Route path="vans" element={<Vans />} loader={vansPageLoader} />
+        <Route path="vans" element={<Vans />} loader={vansPageLoader} errorElement={<Error/>}  />
         <Route path="vans/:id" element={<VanDetail />} />
 
         <Route path="host" element={<HostLayout />}>

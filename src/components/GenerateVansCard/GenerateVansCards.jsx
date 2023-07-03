@@ -16,26 +16,15 @@ function GenerateVansCards() {
 
   const typeFilter = searchParams.get("type");
 
-  const { isLoading, error, data } = useFetch("/api/vans");
-
-
-  const loaderData = useLoaderData()
-  console.log(loaderData)
-
-  //If is loading show Loading component
-  if (isLoading) return <LoadingScreen />;
-
-  //If there is any error, show this message
-  if (error) return <h1>Não foi possível encontrar vans: {error.message}</h1>;
+  const data = useLoaderData()
+ 
 
   //Filtering vans data
   const displayedVans = typeFilter
-    ? data.vans.filter((van) => van.type === typeFilter)
-    : data.vans;
+    ? data.filter((van) => van.type === typeFilter)
+    : data;
 
-  //If there is no error and loading is complete, map the components
-  //Should not be rendered if there is no data or error
-  return (
+   return (
     <ul className={styles.cardsContainer}>
       {displayedVans?.map((vanData) => (
         <VanCard key={vanData.id} data={vanData} />
