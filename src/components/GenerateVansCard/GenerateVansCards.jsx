@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import styles from "./GenerateVansCards.module.css";
-import useFetch from "react-fetch-hook";
 import { Link, useSearchParams, useLoaderData } from "react-router-dom";
 import TypeTag from "../TypeTag/TypeTag";
-import LoadingScreen from "../LoadingScreen/LoadingScreen";
-import { getVans } from "../../../api";
+import { getVans } from "../../../api.js";
 
 export function loader() {
   return getVans()
@@ -17,6 +15,7 @@ function GenerateVansCards() {
   const typeFilter = searchParams.get("type");
 
   const data = useLoaderData()
+  console.log(data)
  
 
   //Filtering vans data

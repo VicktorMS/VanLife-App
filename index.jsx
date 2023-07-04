@@ -10,8 +10,9 @@ import {
   Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements,
+  createRoutesFromElements
 } from "react-router-dom";
+import { redirect } from "./redirectUtil.js";
 
 import Home from "./src/pages/Home/Home";
 import About from "./src/pages/About/About";
@@ -33,8 +34,9 @@ import HostVanPricing from "./src/pages/Host/HostVanPricing/HostVanPricing";
 import NotFound from "./src/components/NotFound/NotFound.jsx";
 
 import Error from "./src/components/Error/Error.jsx";
-import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx"
-
+import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx";
+import { loader as hostVansPageLoader } from "./src/components/GenerateHostVansList/GenerateHostVansList.jsx";
+import { loader as vanDetailPageLoader} from './src/pages/VanDetail/VanDetail.jsx'
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -45,14 +47,51 @@ function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="about" element={<About />} />
-        <Route path="vans" element={<Vans />} loader={vansPageLoader} errorElement={<Error/>}  />
-        <Route path="vans/:id" element={<VanDetail />} />
+        <Route
+          path="vans"
+          element={<Vans />}
+          loader={vansPageLoader}
+          errorElement={<Error />}
+        />
+        <Route path="vans/:id" element={<VanDetail />} loader={vanDetailPageLoader}/>
 
-        <Route path="host" element={<HostLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="income" element={<Income />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="vans" element={<HostVans />} />
+        <Route
+          path="host"
+          element={<HostLayout />}
+          loader={async () => {
+            const isLoggedIn = true;
+            if (!isLoggedIn) {
+              throw redirect('/login')
+            }
+            return null;
+          }}
+        >
+          <Route
+            index
+            element={<Dashboard />}
+            loader={async () => {
+              return null;
+            }}
+          />
+          <Route
+            path="income"
+            element={<Income />}
+            loader={async () => {
+              return null;
+            }}
+          />
+          <Route
+            path="reviews"
+            element={<Reviews />}
+            loader={async () => {
+              return null;
+            }}
+          />
+          <Route
+            path="vans"
+            element={<HostVans />}
+            loader={hostVansPageLoader}
+          />
 
           <Route path="vans/:id" element={<HostVanDetail />}>
             <Route index element={<HostVanInfo />} />
