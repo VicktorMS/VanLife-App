@@ -5,10 +5,11 @@ import styles from "./VanDetail.module.css";
 import TypeTag from '../../components/TypeTag/TypeTag'
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { getVans } from "../../../api";
+import { requireAuth } from "../../../utils";
 
 
-export function loader({params}) {
-  console.log("porra",params)
+export async function loader({params}) {
+  await requireAuth()
   return getVans(params.id)
 }
 

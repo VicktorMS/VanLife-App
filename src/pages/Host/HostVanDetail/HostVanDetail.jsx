@@ -1,9 +1,14 @@
 import React from "react";
 import styles from "./HostVanDetail.module.css";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useLoaderData, useParams } from "react-router-dom";
 import TypeTag from '../../../components/TypeTag/TypeTag'
-import useFetch from "react-fetch-hook";
-import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
+import { getHostVans } from "../../../../api";
+import { requireAuth } from "../../../../utils";
+
+export async function loader({params}) {
+  await requireAuth()
+  return getHostVans(params.id)
+}
 
 function HostVanDetail() {
   const linkIsActive = {
@@ -11,16 +16,11 @@ function HostVanDetail() {
     textDecoration: "underline",
     color: "#161616",
   };
-  const { id: paramID } = useParams();
 
-  const { isLoading, data, error } = useFetch(`/api/host/vans/${paramID}`);
+  const data = useLoaderData()
+  console.log(data)
 
-  if (isLoading) return <LoadingScreen/>;
-
-  if (error) return "Não foi possível encontrar essa Van" + error;
-
-  const { name, id, imageUrl, price, type } = data.vans[0];
-
+  const { name, id, imageUrl, price, type } = data[0];
 
   return (
     <div className={styles.pageContainer}>
@@ -45,7 +45,7 @@ function HostVanDetail() {
             <li><NavLink style={({ isActive }) => (isActive ? linkIsActive : null)} to='photos'>Photos</NavLink></li>
           </ul>
         </nav>
-        <Outlet context={data.vans}/>
+        <Outlet context={data}/>
       </div>
     </div>
   );

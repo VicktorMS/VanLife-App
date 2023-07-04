@@ -1,13 +1,11 @@
 import React from "react";
-import useFetch from "react-fetch-hook";
 import styles from "./GenerateHostVansList.module.css";
-import LoadingScreen from "../LoadingScreen/LoadingScreen";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { requireAuth } from "../../../utils";
 import { getHostVans } from "../../../api";
-import { useLoaderData } from "react-router-dom";
 
-
-export function loader() {
+export async function loader() {
+  await requireAuth()
   return getHostVans();
 }
 

@@ -10,9 +10,9 @@ import {
   Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements
+  createRoutesFromElements,
 } from "react-router-dom";
-import { redirect } from "./redirectUtil.js";
+import { requireAuth } from "./utils.js";
 
 import Home from "./src/pages/Home/Home";
 import About from "./src/pages/About/About";
@@ -27,7 +27,9 @@ import Income from "./src/pages/Host/Income/Income";
 import Reviews from "./src/pages/Host/Reviews/Reviews";
 import HostVans from "./src/pages/Host/HostVans/HostVans";
 
-import HostVanDetail from "./src/pages/Host/HostVanDetail/HostVanDetail";
+import HostVanDetail, {
+  loader as hostVanDetailPageLoader,
+} from "./src/pages/Host/HostVanDetail/HostVanDetail";
 import HostVanInfo from "./src/pages/Host/HostVanInfo/HostVanInfo";
 import HostVanPhotos from "./src/pages/Host/HostVanPhotos/HostVanPhotos";
 import HostVanPricing from "./src/pages/Host/HostVanPricing/HostVanPricing";
@@ -36,7 +38,7 @@ import NotFound from "./src/components/NotFound/NotFound.jsx";
 import Error from "./src/components/Error/Error.jsx";
 import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx";
 import { loader as hostVansPageLoader } from "./src/components/GenerateHostVansList/GenerateHostVansList.jsx";
-import { loader as vanDetailPageLoader} from './src/pages/VanDetail/VanDetail.jsx'
+import { loader as vanDetailPageLoader } from "./src/pages/VanDetail/VanDetail.jsx";
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -53,39 +55,31 @@ function App() {
           loader={vansPageLoader}
           errorElement={<Error />}
         />
-        <Route path="vans/:id" element={<VanDetail />} loader={vanDetailPageLoader}/>
+        <Route
+          path="vans/:id"
+          element={<VanDetail />}
+          loader={vanDetailPageLoader}
+        />
 
         <Route
           path="host"
           element={<HostLayout />}
-          loader={async () => {
-            const isLoggedIn = true;
-            if (!isLoggedIn) {
-              throw redirect('/login')
-            }
-            return null;
-          }}
+          loader={async () => await requireAuth()}
         >
           <Route
             index
             element={<Dashboard />}
-            loader={async () => {
-              return null;
-            }}
+            loader={async () => await requireAuth()}
           />
           <Route
             path="income"
             element={<Income />}
-            loader={async () => {
-              return null;
-            }}
+            loader={async () => await requireAuth()}
           />
           <Route
             path="reviews"
             element={<Reviews />}
-            loader={async () => {
-              return null;
-            }}
+            loader={async () => await requireAuth()}
           />
           <Route
             path="vans"
@@ -93,7 +87,11 @@ function App() {
             loader={hostVansPageLoader}
           />
 
-          <Route path="vans/:id" element={<HostVanDetail />}>
+          <Route
+            path="vans/:id"
+            element={<HostVanDetail />}
+            loader={hostVanDetailPageLoader}
+          >
             <Route index element={<HostVanInfo />} />
             <Route path="photos" element={<HostVanPhotos />} />
             <Route path="pricing" element={<HostVanPricing />} />
