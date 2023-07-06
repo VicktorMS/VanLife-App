@@ -39,6 +39,7 @@ import Error from "./src/components/Error/Error.jsx";
 import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx";
 import { loader as hostVansPageLoader } from "./src/components/GenerateHostVansList/GenerateHostVansList.jsx";
 import { loader as vanDetailPageLoader } from "./src/pages/VanDetail/VanDetail.jsx";
+import { loader as loginPageLoader } from "./src/pages/Login/Login.jsx"
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -47,7 +48,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<Login />} loader={loginPageLoader}/>
         <Route path="about" element={<About />} />
         <Route
           path="vans"

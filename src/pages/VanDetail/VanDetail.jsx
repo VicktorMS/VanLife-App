@@ -9,7 +9,6 @@ import { requireAuth } from "../../../utils";
 
 
 export async function loader({params}) {
-  await requireAuth()
   return getVans(params.id)
 }
 
