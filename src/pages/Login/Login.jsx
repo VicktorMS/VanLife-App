@@ -16,6 +16,7 @@ export default function Login() {
   const [status, setStatus] = React.useState("idle");
 
   const notLoggedMessage = useLoaderData();
+  const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +24,7 @@ export default function Login() {
     setStatus("submitting");
     console.log(loginFormData);
     loginUser(loginFormData)
-      .then((data) => console.log(data))
+      .then(() => navigate('/host', { replace: true }))
       .catch((error) => setError(error))
       .finally(() => {
         setStatus("idle");
