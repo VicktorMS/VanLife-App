@@ -39,7 +39,10 @@ import Error from "./src/components/Error/Error.jsx";
 import { loader as vansPageLoader } from "./src/components/GenerateVansCard/GenerateVansCards.jsx";
 import { loader as hostVansPageLoader } from "./src/components/GenerateHostVansList/GenerateHostVansList.jsx";
 import { loader as vanDetailPageLoader } from "./src/pages/VanDetail/VanDetail.jsx";
-import { loader as loginPageLoader } from "./src/pages/Login/Login.jsx"
+import {
+  loader as loginPageLoader,
+  action as loginPageAction,
+} from "./src/pages/Login/Login.jsx";
 
 function App() {
   //BrowserRouter é um "Context Provider" ele provém contexto para todos os seus filhos
@@ -48,7 +51,12 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<Login />} loader={loginPageLoader}/>
+        <Route
+          path="login"
+          element={<Login />}
+          loader={loginPageLoader}
+          action={loginPageAction}
+        />
         <Route path="about" element={<About />} />
         <Route
           path="vans"
@@ -65,22 +73,22 @@ function App() {
         <Route
           path="host"
           element={<HostLayout />}
-          loader={async () => await requireAuth()}
+          loader={async ({ request }) => await requireAuth(request)}
         >
           <Route
             index
             element={<Dashboard />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
           />
           <Route
             path="income"
             element={<Income />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
           />
           <Route
             path="reviews"
             element={<Reviews />}
-            loader={async () => await requireAuth()}
+            loader={async ({ request }) => await requireAuth(request)}
           />
           <Route
             path="vans"
