@@ -1,12 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 import styles from "./GenerateVansCards.module.css";
-import { Link, useSearchParams, useLoaderData } from "react-router-dom";
+import {
+  Link,
+  useSearchParams,
+  useLoaderData,
+  defer,
+  Await,
+} from "react-router-dom";
 import TypeTag from "../TypeTag/TypeTag";
 import { getVans } from "../../../api.js";
 
 export async function loader() {
-  return getVans()
+  const vansPromise = getVans();
+  return defer({ vans: vansPromise });
 }
 
 function GenerateVansCards() {
@@ -14,20 +21,23 @@ function GenerateVansCards() {
 
   const typeFilter = searchParams.get("type");
 
-  const data = useLoaderData()
-  console.log(data)
- 
+  const dataPromise = useLoaderData();
 
   //Filtering vans data
-  const displayedVans = typeFilter
-    ? data.filter((van) => van.type === typeFilter)
-    : data;
 
-   return (
+  return (
     <ul className={styles.cardsContainer}>
-      {displayedVans?.map((vanData) => (
-        <VanCard key={vanData.id} data={vanData} />
-      ))}
+      <Await resolve={dataPromise.vans}>
+        {(loadedVans) => {
+          const displayedVans = typeFilter
+            ? loadedVans.filter((van) => van.type === typeFilter)
+            : loadedVans;
+
+          return displayedVans.map((vanData) => (
+            <VanCard key={vanData.id} data={vanData} />
+          ));
+        }}
+      </Await>
     </ul>
   );
 }
