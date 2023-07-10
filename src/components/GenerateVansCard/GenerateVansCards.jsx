@@ -9,6 +9,7 @@ import {
   Await,
 } from "react-router-dom";
 import TypeTag from "../TypeTag/TypeTag";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import { getVans } from "../../../api.js";
 
 export async function loader() {
@@ -27,17 +28,19 @@ function GenerateVansCards() {
 
   return (
     <ul className={styles.cardsContainer}>
-      <Await resolve={dataPromise.vans}>
-        {(loadedVans) => {
-          const displayedVans = typeFilter
-            ? loadedVans.filter((van) => van.type === typeFilter)
-            : loadedVans;
+      <React.Suspense fallback={<LoadingScreen/>}>
+        <Await resolve={dataPromise.vans}>
+          {(loadedVans) => {
+            const displayedVans = typeFilter
+              ? loadedVans.filter((van) => van.type === typeFilter)
+              : loadedVans;
 
-          return displayedVans.map((vanData) => (
-            <VanCard key={vanData.id} data={vanData} />
-          ));
-        }}
-      </Await>
+            return displayedVans.map((vanData) => (
+              <VanCard key={vanData.id} data={vanData} />
+            ));
+          }}
+        </Await>
+      </React.Suspense>
     </ul>
   );
 }
