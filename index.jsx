@@ -68,6 +68,7 @@ function App() {
           path="vans/:id"
           element={<VanDetail />}
           loader={vanDetailPageLoader}
+          errorElement={<Error />}
         />
 
         <Route
@@ -78,7 +79,7 @@ function App() {
           <Route
             index
             element={<Dashboard />}
-            loader={async ({ request }) => await requireAuth(request)}
+            loader={hostVansPageLoader}
           />
           <Route
             path="income"
@@ -92,16 +93,18 @@ function App() {
           />
           <Route
             path="vans"
+            errorElement={<Error />}
             element={<HostVans />}
             loader={hostVansPageLoader}
           />
 
           <Route
             path="vans/:id"
+            errorElement={<Error />}
             element={<HostVanDetail />}
             loader={hostVanDetailPageLoader}
           >
-            <Route index element={<HostVanInfo />} />
+            <Route index errorElement={<Error />} element={<HostVanInfo />} />
             <Route path="photos" element={<HostVanPhotos />} />
             <Route path="pricing" element={<HostVanPricing />} />
           </Route>
