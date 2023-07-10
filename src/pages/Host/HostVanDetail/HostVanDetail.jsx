@@ -10,13 +10,13 @@ import {
   Await,
 } from "react-router-dom";
 import TypeTag from "../../../components/TypeTag/TypeTag";
-import { getHostVans } from "../../../../api";
+import { getVan } from "../../../../api";
 import { requireAuth } from "../../../../utils";
 import LoadingScreen from "../../../components/LoadingScreen/LoadingScreen";
 
 export async function loader({ params, request }) {
   await requireAuth(request);
-  return defer({ van: getHostVans(params.id) });
+  return defer({ van: getVan(params.id) });
 }
 
 function HostVanDetail() {

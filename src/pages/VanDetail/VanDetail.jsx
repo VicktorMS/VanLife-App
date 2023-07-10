@@ -3,11 +3,11 @@ import { useParams, Link, useLocation, useLoaderData, defer, Await } from "react
 import styles from "./VanDetail.module.css";
 import TypeTag from '../../components/TypeTag/TypeTag'
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { getVans } from "../../../api";
+import { getVan } from "../../../api";
 
 
 export async function loader({params}) {
-  return defer({van: getVans(params.id)})
+  return defer({van: getVan(params.id)})
 }
 
 function VanDetail() {

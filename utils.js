@@ -1,4 +1,5 @@
-import { redirect } from "./redirectUtil"
+// import { redirect } from "./redirectUtil"
+import { redirect } from "react-router-dom"
 
 export async function requireAuth(request){
     let isLoggedIn = localStorage.getItem('loggedIn');
