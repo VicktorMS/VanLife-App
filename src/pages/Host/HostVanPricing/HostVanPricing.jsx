@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import styles from './HostVanPricing.module.css'
 
 function HostVanPricing() {
-  const [data] = useOutletContext()
+  const data = useOutletContext()
 
   return (
     <p className={styles.container}>

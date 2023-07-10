@@ -5,8 +5,8 @@ import TypeTag from '../../../components/TypeTag/TypeTag'
 import { getHostVans } from "../../../../api";
 import { requireAuth } from "../../../../utils";
 
-export async function loader({params}) {
-  await requireAuth()
+export async function loader({params, request}) {
+  await requireAuth(request)
   return getHostVans(params.id)
 }
 
@@ -20,7 +20,7 @@ function HostVanDetail() {
   const data = useLoaderData()
   console.log(data)
 
-  const { name, id, imageUrl, price, type } = data[0];
+  const { name, id, imageUrl, price, type } = data;
 
   return (
     <div className={styles.pageContainer}>

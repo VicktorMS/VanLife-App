@@ -4,7 +4,7 @@ import styles from './HostVanPhotos.module.css'
 
 
 function HostVanPhotos() {
-  const [data] = useOutletContext()
+  const data = useOutletContext()
   return (
     <div className={styles.container}>
       <img src={data.imageUrl} alt={data.name}/>

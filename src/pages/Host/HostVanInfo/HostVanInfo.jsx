@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import styles from './HostVanInfo.module.css'
 
 function HostVanInfo() {
-  const [data] = useOutletContext()
+  const data = useOutletContext()
   return (
       <ul className={styles.containerList}>
         <li><span>Name:</span>{data.name}</li>
@@ -14,4 +14,4 @@ function HostVanInfo() {
   )
 }
 
-export default HostVanInfo
+export default HostVanInfo;
