@@ -16,7 +16,7 @@ function Income() {
       <h2>$2,260</h2>
       <img
         className={styles.graph}
-        src="/src/assets/income-graph.png"
+        src="/assets/income-graph.png"
         alt="Income graph"
       />
       <div className={styles.infoHeader}>

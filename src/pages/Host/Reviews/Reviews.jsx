@@ -29,7 +29,7 @@ function Reviews() {
       </div>
       <img
         className={styles.graph}
-        src="/src/assets/reviews-graph.png"
+        src="/assets/reviews-graph.png"
         alt="Review graph"
       />
       <h3>Reviews (2)</h3>

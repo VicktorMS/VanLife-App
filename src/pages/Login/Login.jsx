@@ -56,6 +56,12 @@ export default function Login() {
           </button>
         )}
       </Form>
+      <div style={{display: "flex",flexDirection: "column", alignItems: 'center', backgroundColor: "#fff", borderRadius: 5, padding: 16}}>
+        <h3 style={{fontSize: 20}}>Hi friend! 👋</h3>
+        <p>This is a demo version, you can use the credentials below to login.</p>
+        <p><b>Email:</b> b@b.com</p>
+        <p><b>Password:</b> p123</p>
+      </div>
     </div>
   );
 }

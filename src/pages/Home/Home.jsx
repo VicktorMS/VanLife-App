@@ -12,7 +12,7 @@ function Home() {
           perfect van to make your perfect road trip.
         </p>
         <button>
-          <Link to="/vans">Encontre sua Van</Link>
+          <Link to="/vans">Find your Van</Link>
         </button>
       </div>
       <div className={styles.bottom}></div>
